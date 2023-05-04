@@ -20,13 +20,12 @@ class SelenideTest {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:9999/");
         $("[data-test-id=city] input").setValue("Москва");
-        $("[data-test-id=date] input").setValue(str);
+        $("[data-test-id=date] input").setValue(LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         $("[data-test-id=name] input").setValue("Романов Кирилл");
         $("[data-test-id=phone] input").setValue("+79134204422");
         $("[data-test-id=agreement]").click();
         $$("button").find(exactText("Забронировать")).click();
         $("[data-test-id=notification]").should(appear, Duration.ofSeconds(15));
-        $("[data-test-id=date] input").setValue(str);
 
 
     }
